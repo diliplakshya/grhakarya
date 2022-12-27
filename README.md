@@ -11,6 +11,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 ## Pip install
 pip install fastapi
 pip install "uvicorn[standard]"
+pip install boto3
 
 ## Add your files
 
