@@ -1,29 +1,32 @@
-def create_table(client):
-    client.create_table(
-        TableName='Milk',                # create table Recipes
-        AttributeDefinitions=[
-            {
-                'AttributeName': 'uid',     # In this case, I only specified uid as partition key (there is no sort key)
-                'AttributeType': 'S'        # with type string
-            },
-            {
-                'AttributeName': 'quantity',     # In this case, I only specified uid as partition key (there is no sort key)
-                'AttributeType': 'N'        # with type string
-            }
+def create_table(client=None):
+    """
+    Creates a DynamoDB table.
+
+    :param client: Either a Boto3 or DAX resource.
+    :return: The newly created table.
+    """
+    if client is None:
+        raise Exception("Invalid client object.")
+
+    table_name = 'Milk'
+
+    params = {
+        'TableName': table_name,
+        'KeySchema': [
+            {'AttributeName': 'quantity', 'KeyType': 'HASH'},
+            {'AttributeName': 'price', 'KeyType': 'RANGE'}
         ],
-        KeySchema=[
-            {
-                'AttributeName': 'uid',     # attribute uid serves as partition key
-                'KeyType': 'HASH'
-            },
-            {
-                'AttributeName': 'quantity',     # attribute uid serves as partition key
-                'KeyType': 'RANGE'
-            }
+        'AttributeDefinitions': [
+            {'AttributeName': 'quantity', 'AttributeType': 'N'},
+            {'AttributeName': 'price', 'AttributeType': 'N'}
         ],
-        ProvisionedThroughput={             # specying read and write capacity units
-            'ReadCapacityUnits': 10,        # these two values really depend on the app's traffic
+        'ProvisionedThroughput': {
+            'ReadCapacityUnits': 10,
             'WriteCapacityUnits': 10
         }
-    )
-    print("Table created...")
+    }
+    table = client.create_table(**params)
+    print(f"Creating {table_name}...")
+    table.wait_until_exists()
+    return table
+

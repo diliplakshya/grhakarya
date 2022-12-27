@@ -8,14 +8,15 @@ from .config import settings
 def initialize_db() -> ServiceResource:
     print("url {}".format(settings.db_url))
     client =  boto3.resource('dynamodb',
-         endpoint_url=settings.db_url,
+         #endpoint_url=settings.db_url,
          region_name=settings.aws_region,
          aws_access_key_id=settings.aws_access_key_id,
          aws_secret_access_key=settings.aws_secret_access_key)
     
     print("Connected to Dynamo DB")
 
-    create_table(client=client)
+    if 'Milk' not in [table.name for table in client.tables.all()]:
+        table =  create_table(client=client)
     return client
 
 
