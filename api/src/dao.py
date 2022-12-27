@@ -3,7 +3,7 @@ class Dao:
         self.client = client
 
 def create(self, item):
-    table_name = 'MilkSupply'
+    table_name = 'Milk'
     table = self.client.Table(table_name)
     # item = Item={
     #         'uid': '9a0',

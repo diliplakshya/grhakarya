@@ -1,6 +1,6 @@
 def create_table(client):
     client.create_table(
-        TableName='MilkSupply',                # create table Recipes
+        TableName='Milk',                # create table Recipes
         AttributeDefinitions=[
             {
                 'AttributeName': 'uid',     # In this case, I only specified uid as partition key (there is no sort key)
@@ -26,4 +26,4 @@ def create_table(client):
             'WriteCapacityUnits': 10
         }
     )
-
+    print("Table created...")
