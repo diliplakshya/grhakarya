@@ -3,8 +3,7 @@ class Dao:
         self.client = client
 
     def create(self, item):
-        print("inserting values {}".format(item))
-        table_name = 'Milk'
+        table_name = 'MilkSupply'
         table = self.client.Table(table_name)
         # item = Item={
         #         'uid': '9a0',
@@ -15,6 +14,6 @@ class Dao:
         table.put_item(Item=item)
 
         # Scan Table
-        scan_response = table.scan(TableName='Milk')
+        scan_response = table.scan(TableName='MilkSupply')
         for item in scan_response['Items']:
             print(item)

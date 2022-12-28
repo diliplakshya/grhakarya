@@ -8,17 +8,17 @@ def create_table(client=None):
     if client is None:
         raise Exception("Invalid client object.")
 
-    table_name = 'Milk'
+    table_name = 'MilkSupply'
 
     params = {
         'TableName': table_name,
         'KeySchema': [
-            {'AttributeName': 'quantity', 'KeyType': 'HASH'},
-            {'AttributeName': 'price', 'KeyType': 'RANGE'}
+            {'AttributeName': 'uid', 'KeyType': 'HASH'},
+            {'AttributeName': 'quantity', 'KeyType': 'RANGE'}
         ],
         'AttributeDefinitions': [
-            {'AttributeName': 'quantity', 'AttributeType': 'N'},
-            {'AttributeName': 'price', 'AttributeType': 'N'}
+            {'AttributeName': 'uid', 'AttributeType': 'S'},
+            {'AttributeName': 'quantity', 'AttributeType': 'N'}
         ],
         'ProvisionedThroughput': {
             'ReadCapacityUnits': 10,

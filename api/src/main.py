@@ -8,8 +8,9 @@ from .dao import Dao
 
 
 class Milk(BaseModel):
+    uid: str
     quantity: int
-    price: int
+    price: int = None
     #description: Union[str, None] = None
 
 
@@ -24,6 +25,10 @@ async def root():
 
 @app.post("/milk/")
 async def create(milk: Milk):
+    dao.create(milk.dict())
+
+@app.get("/milk/")
+async def get():
     dao.create(milk.dict())
 
 if __name__ == '__main__':
