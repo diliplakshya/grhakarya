@@ -23,7 +23,7 @@ def initialize_db() -> ServiceResource:
 
     print("Connected to Dynamo DB")
 
-    if 'MilkSupply' not in [table.name for table in client.tables.all()]:
+    if 'MilkProduct' not in [table.name for table in client.tables.all()]:
         table =  create_table(client=client)
     return client
 

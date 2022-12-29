@@ -25,11 +25,11 @@ async def root():
 
 @app.post("/milk/")
 async def create(milk: Milk):
-    dao.create(milk.dict())
+    return dao.create(milk.dict())
 
 @app.get("/milk/")
-async def get():
-    dao.create(milk.dict())
+async def get(uid: str):
+    return dao.get(uid)
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="0.0.0.0", port=5000, log_level="info", reload=True)
