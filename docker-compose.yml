@@ -5,7 +5,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - grha:/data/db
+      - grhakarya:/data/db
   admin:
     build:
       context: db
@@ -23,14 +23,14 @@ services:
     volumes:
       - ./web:/app
   api:
-    build: ./api
+    build: ./microservices/milk
     ports:
       - 5000:5000
     env_file:
-      - ./api/.env     # path to your .env file
+      - ./microservices/milk/.env     # path to your .env file
     volumes:
-      - ./api:/app
+      - ./microservices/milk:/app
     depends_on:
       - db
 volumes:
-  grha:
+  grhakarya:
