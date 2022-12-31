@@ -22,7 +22,7 @@ services:
       - 3000:3000
     volumes:
       - ./web:/app
-  api:
+  milk:
     build: ./microservices/milk
     ports:
       - 5000:5000

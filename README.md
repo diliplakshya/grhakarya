@@ -12,6 +12,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 pip install fastapi
 pip install "uvicorn[standard]"
 pip install boto3
+pip install python-multipart
 
 ## Add your files
 
