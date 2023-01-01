@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from ..db import client
 from ..dao import Dao
 from typing import Union
 
@@ -11,8 +10,6 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-dao = Dao(client=client)
-
 class Milk(BaseModel):
     uid: str
     quantity: int
@@ -22,8 +19,10 @@ class Milk(BaseModel):
 
 @router.post("/")
 async def create(milk: Milk):
+    dao = Dao()
     return dao.create(milk.dict())
 
 @router.get("/")
 async def get(uid: str):
+    dao = Dao()
     return dao.get(uid)

@@ -28,4 +28,4 @@ def initialize_db() -> ServiceResource:
     return client
 
 
-client = initialize_db()
+# client = initialize_db()
