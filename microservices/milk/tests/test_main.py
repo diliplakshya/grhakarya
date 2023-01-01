@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from microservices.milk.src.main import app
+from ..src.main import app
 
 
 client = TestClient(app)

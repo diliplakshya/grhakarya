@@ -15,13 +15,11 @@ EXPOSE 5000
 COPY ./requirements.txt .
 # Install the dependencies
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
-ARG AWS_REGION
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
 # Copy everything from ./src directory to /app in the container
 COPY src /app/src
+COPY tests /app/tests
 COPY __init__.py .
-COPY Dockerfile .
+COPY Dockerfile.test .
 COPY requirements.txt .
-# Run the application in the port 5000
-CMD ["uvicorn", "src.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "5000"]
+# Execute testcase
+CMD ["python3", "-m", "pytest"]

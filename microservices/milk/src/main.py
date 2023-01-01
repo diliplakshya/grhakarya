@@ -8,7 +8,7 @@ app = FastAPI()
 
 app.include_router(milk.router)
 
-@app.post("/")
+@app.get("/")
 async def create():
     return {"Samskriti": "Samskar"}
 

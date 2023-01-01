@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  milk_test:
+    build: 
+      context: ./microservices/milk
+      dockerfile: Dockerfile.test
