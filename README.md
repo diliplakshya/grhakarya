@@ -13,6 +13,8 @@ pip install fastapi
 pip install "uvicorn[standard]"
 pip install boto3
 pip install python-multipart
+pip install "python-jose[cryptography]"
+pip install "passlib[bcrypt]"
 
 # Pip install tests
 pip install httpx
@@ -100,3 +102,24 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+
+## Technology Stack
+FastAPI
+FastAPI security
+Requirements.txt
+Docker with Docker Compose and Makefile
+Github actions
+Oauth2 authentication
+Unit tests
+Dynamo DB
+
+To be used;-
+ Traefik
+ Prometheus
+Poetry to manage your project's dependencies
+logging
+Kubernetes
+Mongo
+Flask
+Cassandra
+AWS

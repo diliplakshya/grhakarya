@@ -1,13 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from ..dao import Dao
 from typing import Union
+from ..security import get_current_active_user, User
 
 
 router = APIRouter(
     prefix="/milk",
     tags=["milk"],
-    responses={404: {"description": "Not found"}},
+    # dependencies=[Depends(get_current_active_user)],
+    responses={404: {"description": "Milk URL Not found"}},
 )
 
 class Milk(BaseModel):
@@ -16,13 +18,12 @@ class Milk(BaseModel):
     price: int = None
     description: Union[str, None] = None
 
-
-@router.post("/")
-async def create(milk: Milk):
+@router.post("/", response_model=User)
+async def create(milk: Milk, current_user: User = Depends(get_current_active_user)):
     dao = Dao()
     return dao.create(milk.dict())
-
-@router.get("/")
-async def get(uid: str):
+    
+@router.get("/", response_model=User)
+async def get(uid: str, current_user: User = Depends(get_current_active_user)):
     dao = Dao()
     return dao.get(uid)

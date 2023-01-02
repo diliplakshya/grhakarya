@@ -2,7 +2,7 @@ clean:
 	docker container prune -f
 	docker image prune -f
 build:
-	docker compose -f docker-compose.yml up --build --remove-orphans
+	docker compose -f docker-compose.yml up -d --build --remove-orphans
 start:
 	docker compose -f docker-compose.yml start
 up:
