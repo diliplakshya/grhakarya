@@ -18,6 +18,10 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 ARG AWS_REGION
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
+ARG SECRET_KEY
+ARG ALGORITHM
+ARG ACCESS_TOKEN_EXPIRE_MINUTES
+ARG HASHED_PASSWORD
 # Copy everything from ./src directory to /app in the container
 COPY src /app/src
 COPY __init__.py .
