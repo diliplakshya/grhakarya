@@ -6,7 +6,6 @@ from .config import settings
 
 
 def initialize_db() -> ServiceResource:
-    print("url {}".format(settings.db_url))
     client = None
 
     if settings.aws_dynamo_db:
