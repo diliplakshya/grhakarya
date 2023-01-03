@@ -125,3 +125,18 @@ Mongo
 Flask
 Cassandra
 AWS
+
+# To Run sphinx using poetry
+poetry run sphinx-quickstart
+
+# To create HTML Docs
+poetry run make html
+
+# To generate docs for our code
+Go to parent folder
+poetry run sphinx-apidoc -o ./docs/source src
+include the generated *.rst file in our index.rst
+
+# To add our doc in Read the docs 
+https://docs.readthedocs.io/en/stable/intro/import-guide.html
+https://example-sphinx-basic.readthedocs.io/en/latest/
