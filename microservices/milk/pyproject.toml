@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "milk"
+version = "0.1.0"
+description = "Daily buying of milk"
+authors = ["Dilip Kumar Sharma <diliplakshya@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.88.0"
+boto3 = "^1.26.41"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+python-multipart = "^0.0.5"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+httpx = "^0.23.2"
+pytest = "^7.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

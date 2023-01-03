@@ -114,6 +114,11 @@ Unit tests
 Dynamo DB
 
 To be used;-
+ Traefik
+ Prometheus
+ Sphinx
+ Creating wheel package
+Poetry to manage your project's dependencies
 logging
 Kubernetes
 Mongo

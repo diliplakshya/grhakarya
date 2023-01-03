@@ -11,15 +11,20 @@ ENV PYTHONUNBUFFERED 1
 
 # Expose the port 5000 in which our application runs
 EXPOSE 5000 
-# Copy requirements from host, to docker container in /app 
-COPY ./requirements.txt .
-# Install the dependencies
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
 # Copy everything from ./src directory to /app in the container
 COPY src /app/src
 COPY tests /app/tests
 COPY __init__.py .
 COPY Dockerfile.test .
-COPY requirements.txt .
+COPY pyproject.toml .
+
+RUN pip3 install poetry
+# already in a virtual environment by using a docker image, there's no need to build another environment
+RUN poetry config virtualenvs.create false
+
+# Installs all the required packages minus the development packages
+RUN poetry install --no-dev
+
 # Execute testcase
 CMD ["python3", "-m", "pytest"]
