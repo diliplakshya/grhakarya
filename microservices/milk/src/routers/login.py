@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException, status, APIRouter
-from ..security import Token, authenticate_user, fake_users_db, \
-    create_access_token
+from ..security import Token, authenticate_user, fake_users_db
+from ..utils.password_helper import create_access_token
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 from ..config import settings
