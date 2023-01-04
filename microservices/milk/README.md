@@ -106,17 +106,19 @@ If you have run out of energy or time for your project, put a note at the top of
 ## Technology Stack
 FastAPI
 FastAPI security
-Requirements.txt
+poetry
+Sphinx
 Docker with Docker Compose and Makefile
 Github actions
 Oauth2 authentication
 Unit tests
 Dynamo DB
+Makefile
 
 To be used;-
  Traefik
  Prometheus
- Sphinx
+ 
  Creating wheel package
 Poetry to manage your project's dependencies
 logging
@@ -130,11 +132,12 @@ AWS
 poetry run sphinx-quickstart
 
 # To create HTML Docs
+go to docs folder and run below command
 poetry run make html
 
 # To generate docs for our code
 Go to parent folder
-poetry run sphinx-apidoc -o ./docs/source src
+poetry run sphinx-apidoc -o ./docs/source src/
 include the generated *.rst file in our index.rst
 
 # To add our doc in Read the docs 
