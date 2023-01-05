@@ -74,6 +74,8 @@
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -114,6 +116,8 @@ Major frameworks/libraries used in this project. Here are a few examples.
 - Feature 2
 - Feature 3
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- Color Reference -->
 ### :art: Color Reference
 
@@ -124,6 +128,7 @@ Major frameworks/libraries used in this project. Here are a few examples.
 | Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
 | Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Env Variables -->
 ### :key: Environment Variables
@@ -134,7 +139,7 @@ To run this project, you will need to add the following environment variables to
 
 `AWS_REGION`
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
@@ -216,6 +221,7 @@ To deploy this project run
   yarn deploy
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Usage -->
 ## :eyes: Usage
@@ -280,6 +286,8 @@ See `contributing.md` for ways to get started.
 
 Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- FAQ -->
 ## :grey_question: FAQ
 
@@ -291,12 +299,14 @@ Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-te
 
   + Answer 2
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- License -->
 ## :warning: License
 
 Distributed under the no License. See LICENSE.txt for more information.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Contact -->
 ## :handshake: Contact
@@ -305,6 +315,7 @@ Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_
 
 Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Acknowledgments -->
 ## :gem: Acknowledgements
@@ -321,7 +332,6 @@ Use this section to mention useful resources and libraries that you have used in
 * [React Icons](https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
