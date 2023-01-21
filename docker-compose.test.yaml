@@ -4,3 +4,5 @@ services:
     build: 
       context: ./microservices/milk
       dockerfile: Dockerfile.test
+    image: diliplakshya/grahakarya-milk-test
+    container_name: grhakarya-milk-test

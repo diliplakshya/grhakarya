@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: milk-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: milk
+  template:
+    metadata:
+      labels:
+        app: milk
+    spec:
+      containers:
+        - name: grahakarya-milk
+          image: diliplakshya/grahakarya-milk
+          ports:
+            - containerPort: 5001
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5001
+          #   periodSeconds: 10
+          #   initialDelaySeconds: 5
+          imagePullPolicy: Always
+
+          env:
+            - name: FOLDER
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: folder
+
+            - name: CONNECTION_WAY
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: connection_way
+
+            - name: LOCAL
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: local
+
+            - name: IP_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: ip_address
+
+            - name: DNS
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: dns
+
+            - name: AWS_DYNAMO_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: aws_dynamo_db
+
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: db_url
+
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: aws_region
+
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: aws_access_key_id
+
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: aws_secret_access_key
+
+            - name: SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: secret_key
+
+            - name: ALGORITHM
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: algorithm
+
+            - name: ACCESS_TOKEN_EXPIRY_MINUTES
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: access_token_expire_minutes
+
+            - name: HASHED_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: milk-data-store-env
+                  key: hashed_password
+
+          volumeMounts:
+            - mountPath: /app/data
+              name: milk-volume
+
+      volumes:
+        - name: milk-volume
+          persistentVolumeClaim:
+            claimName: host-pvc

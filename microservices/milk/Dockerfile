@@ -1,5 +1,14 @@
-FROM python:3.11.1-slim-buster
-# Make /app as a working directory in the container
+FROM diliplakshya/python-3.11.1-poetry-slim-bullseye as requirements-stage
+
+WORKDIR /tmp
+
+COPY pyproject.toml /tmp
+COPY poetry.lock /tmp
+
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+FROM diliplakshya/python-3.11.1-poetry-slim-bullseye
+
 WORKDIR /app
 
 # set environment variables
@@ -9,12 +18,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevents Python from buffering stdout and stderr (equivalent to python -u option)
 ENV PYTHONUNBUFFERED 1
 
-# Expose the port 5000 in which our application runs
-EXPOSE 5000 
-# Copy requirements from host, to docker container in /app 
-# COPY ./requirements.txt .
-# Install the dependencies
-# RUN pip install --no-cache-dir --upgrade -r requirements.txt
+# Expose the port 5001 in which our application runs
+EXPOSE 5001
+
 ARG AWS_REGION
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
@@ -22,18 +28,17 @@ ARG SECRET_KEY
 ARG ALGORITHM
 ARG ACCESS_TOKEN_EXPIRE_MINUTES
 ARG HASHED_PASSWORD
+
+# Copy requirements from host, to docker container in /app 
+# COPY ./requirements.txt .
+# Install the dependencies
+# RUN pip install --no-cache-dir --upgrade -r requirements.txt
+COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
 # Copy everything from ./src directory to /app in the container
 COPY src /app/src
 COPY __init__.py .
-COPY Dockerfile .
-COPY pyproject.toml .
 
-RUN pip3 install poetry
-# already in a virtual environment by using a docker image, there's no need to build another environment
-RUN poetry config virtualenvs.create false
-
-# Installs all the required packages minus the development packages
-RUN poetry install --no-dev
-
-# Run the application in the port 5000
-CMD ["uvicorn", "src.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "5000"]
+# Run the application in the port 5001
+CMD ["uvicorn", "src.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "5001"]
