@@ -20,7 +20,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
-
 def get_connection():
 
     return create_engine(url=SQL_ALCHEMY_MYSQL_CONNECTION_URL)

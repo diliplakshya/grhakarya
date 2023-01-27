@@ -1,25 +1,24 @@
 from botocore.exceptions import ClientError
+from sqlalchemy.orm import Session
+from . import models, schemas
 
 
-class Dao:
-    def __init__(self, client = None) -> None:
-        self.client = client
+def get_user(db: Session, user_id: int):
+    return db.query(models.User).filter(models.User.id == user_id).first()
 
-    def create(self, item):
-        table_name = 'MilkProduct'
-        table = self.client.Table(table_name)
-        # Insert Data
-        table.put_item(Item=item)
 
-        # Scan Table
-        scan_response = table.scan(TableName='MilkProduct')
-        for item in scan_response['Items']:
-            print(item)
+def get_user_by_email(db: Session, email: str):
+    return db.query(models.User).filter(models.User.email == email).first()
 
-    def get(self, uid: str):
-        try:
-            table = self.client.Table('MilkProduct')         # referencing to table MilkProduct
-            response = table.get_item(Key={'uid': uid})     # get MilkProduct using uid (partition key)
-            return response['Item']                         # return single data
-        except ClientError as e:
-            raise ValueError(e.response['Error']['Message'])
+
+def get_users(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.User).offset(skip).limit(limit).all()
+
+
+def create_user(db: Session, user: schemas.UserCreate):
+    fake_hashed_password = user.password + "notreallyhashed"
+    db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user

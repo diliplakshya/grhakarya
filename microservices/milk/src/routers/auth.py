@@ -4,6 +4,12 @@ from ..utils.password_helper import create_access_token
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 from ..config import settings
+from sqlalchemy.orm import Session
+from .. import dao, models, schemas
+from ..db import SessionLocal, engine
+
+
+models.Base.metadata.create_all(bind=engine)
 
 
 router = APIRouter(
@@ -11,6 +17,24 @@ router = APIRouter(
     tags=["token"],
     responses={404: {"description": "Token URL Not found"}},
 )
+
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@router.post("/user", response_model=schemas.User)
+async def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_user = dao.get_user_by_email(db, email=user.email)
+
+    if db_user:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Email Already registered")
+
+    return dao.create_user(db, user)
 
 @router.post("/", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
