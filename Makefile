@@ -17,5 +17,7 @@ down:
 	docker compose down
 logs:
 	docker compose logs
+ps:
+	docker ps -a
 destroy:
 	docker compose -f docker-compose.yaml down -v

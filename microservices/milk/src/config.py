@@ -2,11 +2,11 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    aws_dynamo_db:bool = True # default value if env variable does not exist
-    db_url:str = None
-    aws_region: str = None
-    aws_access_key_id: str = None
-    aws_secret_access_key: str = None
+    mysql_host:str = None
+    mysql_port:str = None
+    mysql_database:str = None
+    mysql_user: str = None
+    mysql_root_password: str = None
     secret_key: str = None
     algorithm: str = None
     access_token_expire_minutes: int = None

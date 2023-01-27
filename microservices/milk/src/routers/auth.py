@@ -12,7 +12,6 @@ router = APIRouter(
     responses={404: {"description": "Token URL Not found"}},
 )
 
-
 @router.post("/", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(fake_users_db, form_data.username, form_data.password)

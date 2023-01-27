@@ -1,24 +1,30 @@
 version: '3.8'
 services:
-  db:
-    image: amazon/dynamodb-local:1.20.0
-    container_name: grahakarya-dynamo-db
+  mysql-db:
+    image: mysql:8.0.29
+    container_name: grahakarya-mysql-db
     ports:
-      - 8000:8000
-    volumes:
-      - grhakarya:/data/db
-  admin:
-    build:
-      context: db
-      dockerfile: Dockerfile
-    image: diliplakshya/grahakarya-dynamo-db-admin
-    container_name: grahakarya-dynamo-db-admin
-    ports:
-    - 8001:8001
+      - "3308:3306"
     environment:
-      - DYNAMO_ENDPOINT=http://db:8000
-    depends_on:
-      - db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    networks: 
+      - mysql-connection
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  mysql-admin:    
+    image: phpmyadmin:latest
+    container_name: grahakarya-mysql-db-admin
+    environment:
+      PMA_HOST: mysql-db
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:      
+      - "8080:80"
+    networks: 
+      - mysql-connection
+
   web:
     build: ./web
     image: diliplakshya/grahakarya-web
@@ -27,6 +33,7 @@ services:
       - 3000:3000
     volumes:
       - ./web:/app
+
   milk:
     build: ./microservices/milk
     image: diliplakshya/grahakarya-milk
@@ -34,10 +41,19 @@ services:
     ports:
       - 5001:5001
     env_file:
-      - ./microservices/milk/.env     # path to your .env file
+      - ./.env     # path to your .env file
     volumes:
       - ./microservices/milk:/app
     depends_on:
-      - db
+      - mysql-db
+
 volumes:
-  grhakarya:
+  mysql-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/database/mysql/data/db'
+
+networks:
+  mysql-connection:

@@ -1,13 +1,13 @@
 from fastapi import FastAPI, Depends
 import uvicorn
 from .security import User, get_current_active_user, oauth2_scheme
-from .routers import login, milk
-
+from .routers import auth, milk
+from .db import client
 
 app = FastAPI(debug=True)
 
 
-app.include_router(login.router)
+app.include_router(auth.router)
 app.include_router(milk.router)
 
 
