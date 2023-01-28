@@ -34,12 +34,27 @@ services:
     volumes:
       - ./web:/app
 
+  auth:
+    build: ./microservices/auth
+    image: diliplakshya/grahakarya-auth
+    container_name: grhakarya-auth
+    ports:
+      - 5001:5001
+    env_file:
+      - ./.env     # path to your .env file
+    volumes:
+      - ./microservices/auth:/app
+    networks: 
+      - mysql-connection
+    depends_on:
+      - mysql-db
+
   milk:
     build: ./microservices/milk
     image: diliplakshya/grahakarya-milk
     container_name: grhakarya-milk
     ports:
-      - 5001:5001
+      - 5002:5002
     env_file:
       - ./.env     # path to your .env file
     volumes:
