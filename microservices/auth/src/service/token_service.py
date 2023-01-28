@@ -21,8 +21,8 @@ def generate_access_token(username: str):
         data={"sub": username}, expires_delta=timedelta(minutes=settings.access_token_expire_minutes)
     )
 
-def authenticate_user(email: str, password: str):
-    user = get_user_by_email(email=email)
+def authenticate_user(db: Session, email: str, password: str):
+    user = get_user_by_email(db=db, email=email)
 
     return False if not user or not get_hashed_password(password) == user.hashed_password else user
 
@@ -55,4 +55,5 @@ async def get_current_user():
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
     if not current_user.is_active:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user")
+
     return current_user
