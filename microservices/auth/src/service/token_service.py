@@ -42,22 +42,30 @@ async def decode_token(token: str = Depends(oauth2_scheme)):
         payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
         username: str = payload.get("sub")
     except JWTError:
-        raise credentials_exception
+        raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail="Failed to validate credentials",
+                        headers={"WWW-Authenticate": "Bearer"},
+                    )
 
     return username
 
-async def get_current_user(db: Session = Depends(db_session)):
-    username = None
-    
-    try:
-        username: str = decode_token()
-    except Exception as exp:
-        raise exp
+async def get_current_user(username: str = Depends(decode_token), db: Session = Depends(db_session)):
+    if username is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User is not authticated.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
     user = get_user_by_email(db=db, email=username)
 
     if user is None:
-        raise credentials_exception
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Invalid User. User is not found in the server.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
         
     return user
 
