@@ -7,6 +7,10 @@ from ..service.token_service import authenticate_user, \
     generate_access_token, get_current_active_user, create_new_user
 from ..dependencies.db_dependency import db_session
 from ..schemas.token_schema import Token
+from ..logging.logging import MyFileLogger
+
+
+logger = MyFileLogger(__name__)
 
 
 router = APIRouter(
@@ -30,10 +34,11 @@ async def get_user(user: UserCreate = Depends(get_current_active_user)):
 
 @router.post("/login", response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(db_session)):
-
+    logger.log_info("Logging User")
     user = authenticate_user(db=db, email=form_data.username, password=form_data.password)
 
     if not user:
+        logger.log_error("Incorrect username or password")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
@@ -42,7 +47,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 
     access_token = generate_access_token(user.email)
     return {"access_token": access_token, "token_type": "bearer"}
-
 
 @router.get("/user", response_model=User)
 async def get_user(user: UserCreate = Depends(get_current_active_user)):

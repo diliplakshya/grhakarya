@@ -21,6 +21,7 @@ ENV PYTHONUNBUFFERED 1
 # Expose the port 5001 in which our application runs
 EXPOSE 5001
 
+ARG LOG_FILE_PATH
 ARG MYSQL_HOST
 ARG MYSQL_PORT
 ARG MYSQL_DATABASE
@@ -39,6 +40,7 @@ COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
 # Copy everything from ./src directory to /app in the container
+COPY configuration /app/configuration
 COPY src /app/src
 COPY __init__.py .
 
