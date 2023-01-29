@@ -1,7 +1,9 @@
 from pydantic import BaseSettings
 import os
 
+
 class Settings(BaseSettings):
+    log_config:str = None
     log_file_path:str = os.getcwd()
 
     mysql_host:str = None

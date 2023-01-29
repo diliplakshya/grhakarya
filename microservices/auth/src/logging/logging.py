@@ -5,7 +5,7 @@ from ..config.config import settings
 
 class MyFileLogger():
     # The config file for logging formatter.
-    config.fileConfig('configuration/logging/log_config.conf', defaults={'logfile': settings.log_file_path}, disable_existing_loggers=True)
+    config.fileConfig(settings.log_config, defaults={"logfile": settings.log_file_path}, disable_existing_loggers=True)
 
     def __init__(self, name):
         self.logger=logging.getLogger(name)
