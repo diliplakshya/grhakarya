@@ -5,7 +5,7 @@ from ..schemas.user_schema import UserCreate, User
 from ..dao.user_dao import get_user_by_email, create_user
 from ..dependencies.oauth_dependency import oauth2_scheme
 from ..service.token_service import authenticate_user, \
-    generate_access_token, get_current_active_user
+    generate_access_token, get_current_active_user, create_new_user
 from ..dependencies.db_dependency import db_session
 
 
@@ -22,13 +22,7 @@ async def token_home(token: str = Depends(oauth2_scheme)):
 
 @router.post("/create", response_model=User)
 async def create(user: UserCreate, db: Session = Depends(db_session)):
-    if get_user_by_email(db=db, email=user.email):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Duplicate user.",
-        )
-
-    return create_user(db=db, user=user)
+    return create_new_user(db=db, user=user)
 
 @router.get("/user", response_model=User)
 async def get_user(user: UserCreate = Depends(get_current_active_user)):
