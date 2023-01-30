@@ -40,6 +40,11 @@
   </p>
 </div>
 
+|Docs Badge| image:: https://readthedocs.org/projects/grhakarya/badge/
+    :alt: Documentation Status
+    :scale: 100%
+    :target: https://grhakarya.readthedocs.io/en/latest/
+
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
 
