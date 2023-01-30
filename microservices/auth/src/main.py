@@ -8,6 +8,8 @@ from fastapi import FastAPI
 import uvicorn
 from .db.connection import Base, engine
 from .routers import token
+from .config.config import settings
+from .routers.sphinx import sphinx_routes
 
 
 description = """
@@ -26,9 +28,9 @@ You will be able to:
 """
 
 app = FastAPI(
-    title="auth",
+    title=settings.api_title,
     description=description,
-    version="0.1.0",
+    version=settings.api_version,
     terms_of_service="http://example.com/terms/",
     contact={
         "name": "Dilip Kumar Sharma",
@@ -40,6 +42,7 @@ app = FastAPI(
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
     redoc_url=None,
+    routes=sphinx_routes(),
 )
 
 app.include_router(token.router)
@@ -51,4 +54,4 @@ async def home():
     return {"Samskriti": "Samskar"}
 
 if __name__ == '__main__':
-    uvicorn.run("main:app", host="0.0.0.0", port=5001, log_level="info", reload=True)
+    uvicorn.run("main:app", host=settings.api_host, port=settings.api_port, reload=True)
