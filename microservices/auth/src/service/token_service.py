@@ -8,8 +8,11 @@ from fastapi import Depends, HTTPException, status
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 from datetime import timedelta
+from jose import jwt
+from datetime import datetime, timedelta
+from typing import Union
 from ..dao.user_dao import get_user_by_email, create_user
-from ..utils.hashing_helper import get_hashed_password, verify_password, create_access_token
+from ..utils.hashing_helper import get_hashed_password, verify_password
 from ..dependencies.db_dependency import db_session
 from ..dependencies.oauth_dependency import oauth2_scheme
 from ..config.config import settings
@@ -21,6 +24,35 @@ credentials_exception = HTTPException(
     detail="Could not validate credentials",
     headers={"WWW-Authenticate": "Bearer"},
 )
+
+def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None) -> str:
+    """
+    Create access token
+
+    To create access token for a given user using JWT.
+
+    Parameters
+    ----------
+    data : dict
+        User data for which access token to be created.
+    expires_delta : Union[timedelta, None]
+        Expiry time after which generated access token will be expired.
+
+    Returns
+    -------
+    str
+        Hashed access token using JWT.
+    """
+    to_encode = data.copy()
+
+    if not expires_delta:
+        expires_delta = timedelta(minutes=5)
+
+    expire = datetime.utcnow() + expires_delta
+
+    to_encode.update({"exp": expire})
+
+    return jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
 
 def generate_access_token(username: str) -> str:
     """

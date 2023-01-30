@@ -5,10 +5,7 @@
 """
 
 from passlib.context import CryptContext
-from datetime import datetime, timedelta
-from typing import Union
 from ..config.config import settings
-from jose import jwt
 
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -51,32 +48,3 @@ def verify_password(password: str, hashed_pass: str) -> bool:
         True if there is a match else False
     """
     return password_context.verify(password, hashed_pass)
-
-def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None) -> str:
-    """
-    Create access token
-
-    To create access token for a given user using JWT.
-
-    Parameters
-    ----------
-    data : dict
-        User data for which access token to be created.
-    expires_delta : Union[timedelta, None]
-        Expiry time after which generated access token will be expired.
-
-    Returns
-    -------
-    str
-        Hashed access token using JWT.
-    """
-    to_encode = data.copy()
-
-    if not expires_delta:
-        expires_delta = timedelta(minutes=5)
-
-    expire = datetime.utcnow() + expires_delta
-
-    to_encode.update({"exp": expire})
-
-    return jwt.encode(to_encode, settings.secret_key, algorithm=settings.algorithm)
