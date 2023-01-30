@@ -1,3 +1,8 @@
+"""
+    User Data model.
+
+    User data model representing User DB table.
+"""
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
@@ -6,14 +11,14 @@ from ..db.connection import Base
 
 class User(Base):
     """
-    User Model
+    User Model Schema class.
 
-    To create table in DB for user.
+    It represents User DB table in database.
 
     Parameters
     ----------
-    Base : _type_
-        _description_
+    Base : Base
+        Base class for data model.
     """
     __tablename__ = "user"
 

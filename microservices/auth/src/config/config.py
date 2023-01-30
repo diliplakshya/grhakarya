@@ -1,8 +1,26 @@
+"""
+    Setting Module
+
+    Environment variable based configuration module.
+"""
+
 from pydantic import BaseSettings
 import os
 
 
 class Settings(BaseSettings):
+    """
+    Configuration Class.
+
+    Configuration for auth API.
+    All variables in class corresponds to environment variables in CAPITAL CASE.
+    example: 'mysql_host' represents an environment variable by name 'MYSQL_HOST'.
+
+    Parameters
+    ----------
+    BaseSettings : BaseSettings.
+        Base Class for Settings
+    """
     log_config:str = None
     log_file_path:str = os.getcwd()
 

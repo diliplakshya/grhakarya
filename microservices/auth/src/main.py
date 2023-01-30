@@ -1,3 +1,9 @@
+"""
+    Main module for API.
+
+    This module is the main module for Fast API app.
+"""
+
 from fastapi import FastAPI
 import uvicorn
 from .db.connection import Base, engine

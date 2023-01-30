@@ -1,3 +1,8 @@
+"""
+    Database connection URL.
+
+    Database connection URL used for connecting to database.
+"""
 from ..config.config import settings
 
 
