@@ -2,7 +2,7 @@ version: '3.8'
 services:
   milk_test:
     build: 
-      context: ./microservices/milk
+      context: ./microservices/auth
       dockerfile: Dockerfile.test
-    image: diliplakshya/grahakarya-milk-test
-    container_name: grhakarya-milk-test
+    image: diliplakshya/grahakarya-auth-test
+    container_name: grhakarya-auth-test

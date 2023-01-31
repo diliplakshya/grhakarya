@@ -51,21 +51,6 @@ services:
     depends_on:
       - mysql-db
 
-  milk:
-    build: ./microservices/milk
-    image: diliplakshya/grahakarya-milk
-    container_name: grhakarya-milk
-    ports:
-      - 5002:5002
-    env_file:
-      - ./.env     # path to your .env file
-    volumes:
-      - ./microservices/milk:/app
-    networks: 
-      - mysql-connection
-    depends_on:
-      - mysql-db
-
 volumes:
   mysql-data:
     driver: local
