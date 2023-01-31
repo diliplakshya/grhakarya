@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: mysql-data-store-env
 data:
-  folder: '/var/lib/mysql'
-  mysql_database: "auth"
-  mysql_user: "root"
-  mysql_root_password: "root"
-  dns: mysql-service.default
+  folder: "/var/lib/mysql"
+  mysql_database: ""
+  mysql_user: ""
+  mysql_root_password: ""
+  dns: ""
