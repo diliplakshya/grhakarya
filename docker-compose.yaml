@@ -5,6 +5,7 @@ services:
     container_name: grahakarya-mysql-db
     ports:
       - "3308:3306"
+    command: --init-file /data/application/dbinit.sql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -12,6 +13,7 @@ services:
       - mysql-connection
     volumes:
       - mysql-data:/var/lib/mysql
+      - mysql-init:/data/application
 
   mysql-admin:    
     image: phpmyadmin:latest
@@ -71,6 +73,13 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '${PWD}/database/mysql/data/db'
+
+  mysql-init:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/database/mysql/data/sql'
 
 networks:
   mysql-connection:

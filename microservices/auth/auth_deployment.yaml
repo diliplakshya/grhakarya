@@ -1,0 +1,162 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: grahakarya-auth
+          image: diliplakshya/grahakarya-auth
+          ports:
+            - containerPort: 5001
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 5001
+          #   periodSeconds: 10
+          #   initialDelaySeconds: 5
+          imagePullPolicy: Always
+
+          env:
+            - name: FOLDER
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: folder
+
+            - name: CONNECTION_WAY
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: connection_way
+
+            - name: LOCAL
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: local
+
+            - name: IP_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: ip_address
+
+            - name: DNS
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: dns
+
+            - name: API_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: api_version
+
+            - name: API_TITLE
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: api_title
+
+            - name: API_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: api_host
+
+            - name: API_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: api_port
+
+            - name: SPHINX_DIRECTORY
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: sphinx_directory
+
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: mysql_host
+
+            - name: MYSQL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: mysql_port
+
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: mysql_database
+
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: mysql_user
+
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: mysql_root_password
+
+            - name: LOG_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: log_config
+
+            - name: LOG_FILE_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: log_file_path
+
+            - name: SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: secret_key
+
+            - name: ALGORITHM
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: algorithm
+
+            - name: ACCESS_TOKEN_EXPIRY_MINUTES
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: access_token_expire_minutes
+
+            - name: HASHED_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: hashed_password
+
+          volumeMounts:
+            - mountPath: /app/data
+              name: auth-volume
+
+      volumes:
+        - name: auth-volume
+          persistentVolumeClaim:
+            claimName: host-pvc
