@@ -25,12 +25,14 @@ build:
     post_install:
       # Install dependencies with 'docs' dependency group
       # https://python-poetry.org/docs/managing-dependencies/#dependency-groups
-      - poetry install --with docs
+      - poetry install --directory= microservices/auth --with docs
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
-   configuration: microservices/auth/docs/conf.py
+  builder: html
+  configuration: microservices/auth/docs/conf.py
+  fail_on_warning: false
 
 # If using Sphinx, optionally build your docs in additional formats such as PDF
 formats:
-   - pdf
+  - pdf
