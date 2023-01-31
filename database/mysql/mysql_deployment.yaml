@@ -29,20 +29,20 @@ spec:
                 configMapKeyRef:
                   name: mysql-data-store-env
                   key: mysql_root_password
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-volume
         - name: grahakarya-mysql-db-admin
           image: phpmyadmin:latest
           ports:
             - containerPort: 80
           imagePullPolicy: Always
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: mysql-volume
           env:
             - name: PMA_HOST
               valueFrom:
                 configMapKeyRef:
                   name: mysql-data-store-env
-                  key: dns
+                  key: local
             - name: PMA_USER
               valueFrom:
                 configMapKeyRef:
