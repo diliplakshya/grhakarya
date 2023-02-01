@@ -19,11 +19,6 @@ spec:
             - containerPort: 3306
           imagePullPolicy: Always
           env:
-            # - name: MYSQL_DATABASE
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       name: mysql-data-store-env
-            #       key: mysql_database
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 configMapKeyRef:
