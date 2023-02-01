@@ -51,8 +51,10 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 # Copy everything from ./src directory to /app in the container
 COPY configuration /app/configuration
 COPY src /app/src
-COPY docs /app/docs
 COPY __init__.py .
+
+RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-build", "docs/source", "docs/build"]
+COPY docs /app/docs
 
 # Run the application in the port 5001
 CMD ["uvicorn", "src.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "5001"]

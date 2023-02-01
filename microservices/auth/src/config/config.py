@@ -27,14 +27,14 @@ class Settings(BaseSettings):
     api_port:int = None
     sphinx_directory:str = None
 
-    log_config:str = "configuration/logging/dev_config.conf"
-    log_file_path:str = "/app/logging.log"
+    log_config:str = None
+    log_file_path:str = None
 
-    mysql_host:str = "mysql-db"
-    mysql_port:str = "3306"
-    mysql_database:str = "auth"
-    mysql_user: str = "root"
-    mysql_root_password: str = "root"
+    mysql_host:str = None
+    mysql_port:str = None
+    mysql_database:str = None
+    mysql_user: str = None
+    mysql_root_password: str = None
 
     secret_key: str = None
     algorithm: str = None
