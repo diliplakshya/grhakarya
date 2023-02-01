@@ -6,6 +6,9 @@ spec:
   selector:
     app: mysql
   ports:
+    - port: 3306
+      name: mysql-db-port
+      targetPort: 3306
     - port: 8080
       name: mysql-admin-port
       targetPort: 80

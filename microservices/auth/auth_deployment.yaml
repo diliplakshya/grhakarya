@@ -17,12 +17,6 @@ spec:
           image: diliplakshya/grahakarya-auth
           ports:
             - containerPort: 5001
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 5001
-          #   periodSeconds: 10
-          #   initialDelaySeconds: 5
           imagePullPolicy: Always
 
           env:
@@ -90,7 +84,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: auth-data-store-env
-                  key: mysql_host
+                  key: dns
 
             - name: MYSQL_PORT
               valueFrom:
@@ -145,12 +139,6 @@ spec:
                 configMapKeyRef:
                   name: auth-data-store-env
                   key: access_token_expire_minutes
-
-            - name: HASHED_PASSWORD
-              valueFrom:
-                configMapKeyRef:
-                  name: auth-data-store-env
-                  key: hashed_password
 
           volumeMounts:
             - mountPath: /app/data

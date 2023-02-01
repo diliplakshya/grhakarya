@@ -51,6 +51,7 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 # Copy everything from ./src directory to /app in the container
 COPY configuration /app/configuration
 COPY src /app/src
+COPY docs /app/docs
 COPY __init__.py .
 
 # Run the application in the port 5001
