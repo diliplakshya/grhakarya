@@ -50,6 +50,12 @@ spec:
                   name: auth-data-store-env
                   key: dns
 
+            - name: ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-data-store-env
+                  key: environment
+
             - name: API_VERSION
               valueFrom:
                 configMapKeyRef:

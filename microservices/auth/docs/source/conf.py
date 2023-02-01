@@ -16,6 +16,8 @@ copyright = '2023, Dilip Kumar Sharma'
 author = 'Dilip Kumar Sharma'
 release = '0.1.0'
 
+master_doc = 'index'
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 

@@ -16,7 +16,11 @@ class MyFileLogger():
     This is used for providing single class across all other modules.
     """
     # The config file for logging formatter.
-    config.fileConfig(settings.log_config, defaults={"logfile": settings.log_file_path}, disable_existing_loggers=True)
+
+    if settings.environment == "development":
+        config.fileConfig(settings.log_config, defaults={"logfile": settings.log_file_path}, disable_existing_loggers=True)
+    else:
+        config.fileConfig(settings.log_config, disable_existing_loggers=True)
 
     def __init__(self, name) -> None:
         """

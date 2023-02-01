@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     BaseSettings : BaseSettings.
         Base Class for Settings
     """
+    environment:str = "development"
     api_version:str = None
     api_title:str = None
     api_host:str = None
