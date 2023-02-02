@@ -16,7 +16,7 @@ def sphinx_routes() -> List[BaseRoute]:
         List of routes
     """
     sphinx = Mount(
-                path="/sphinx",
+                path="/docs",
                 app=StaticFiles(directory=settings.sphinx_directory, html=True),                  
                 name="sphinx"
             )

@@ -8,7 +8,7 @@ from logging import config
 from ..config.config import settings
 
 
-class MyFileLogger():
+class AuthFileLogger():
     """
     Logging Wrapper class.
 

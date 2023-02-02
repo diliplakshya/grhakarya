@@ -10,6 +10,7 @@ from .db.connection import Base, engine
 from .routers import token
 from .config.config import settings
 from .routers.sphinx import sphinx_routes
+from .utils.file_helper import create_dir_if_not_exists
 
 
 description = """
@@ -27,10 +28,22 @@ You will be able to:
 * **Read users** (_not implemented_).
 """
 
+tags_metadata = [
+    {
+        "name": "token",
+        "description": "To Create access token and to get authorization.",
+        "externalDocs": {
+            "description": "Items external docs",
+            "url": "https://fastapi.tiangolo.com/",
+        },
+    },
+]
+
 app = FastAPI(
     title=settings.api_title,
     description=description,
     version=settings.api_version,
+    openapi_tags=tags_metadata,
     terms_of_service="http://example.com/terms/",
     contact={
         "name": "Dilip Kumar Sharma",
@@ -42,12 +55,16 @@ app = FastAPI(
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
     redoc_url=None,
+    docs_url="/client",
     routes=sphinx_routes(),
 )
 
 app.include_router(token.router)
 
 Base.metadata.create_all(bind=engine)
+
+if settings.environment == 'development':
+    create_dir_if_not_exists(settings.log_file_path)
 
 @app.get("/")
 async def home():

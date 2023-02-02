@@ -12,10 +12,10 @@ from ..service.token_service import authenticate_user, \
     generate_access_token, get_current_active_user, create_new_user
 from ..dependencies.db_dependency import db_session
 from ..schemas.token_schema import Token
-from ..logging.logging import MyFileLogger
+from ..logging.logging import AuthFileLogger
 
 
-logger = MyFileLogger(__name__)
+logger = AuthFileLogger(__name__)
 
 
 router = APIRouter(
