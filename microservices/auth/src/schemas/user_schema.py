@@ -3,7 +3,7 @@
 
     This represents the User schema representing User in database.
 """
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class UserBase(BaseModel):
@@ -17,7 +17,8 @@ class UserBase(BaseModel):
     BaseModel : BaseModel
         Base model used for creating new UserBase model.
     """
-    email: str
+    email: str = Field(example="user@gmail.com")
+
 
 class UserCreate(UserBase):
     """
@@ -31,7 +32,8 @@ class UserCreate(UserBase):
     UserBase : UserBase
         Base class having email id for the user.
     """
-    password: str
+    password: str = Field(example="plainpassword")
+
 
 class User(UserBase):
     """
@@ -46,8 +48,8 @@ class User(UserBase):
     UserBase : UserBase
         Base class having details of the user.
     """
-    id: int
-    is_active: bool
+    id: int = Field(example=1)
+    is_active: bool | None = Field(default=True, example="plainpassword")
 
     class Config:
         orm_mode = True

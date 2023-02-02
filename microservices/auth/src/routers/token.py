@@ -3,7 +3,7 @@
 
     API router for authenticatio and authorization.
 """
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import Body, APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from ..schemas.user_schema import UserCreate, User
@@ -30,7 +30,33 @@ async def token_home(token: str = Depends(oauth2_scheme)) -> str:
     return "Welcome"
 
 @router.post("/create", response_model=User)
-async def create(user: UserCreate, db: Session = Depends(db_session)) -> User:
+async def create(user: UserCreate = Body(
+        examples={
+            "first": {
+                "summary": "A first example",
+                "description": "A **first** User works correctly.",
+                "value": {
+                    "email": "dilip@gmail.com",
+                    "password": "plainpassword",
+                },
+            },
+            "second": {
+                "summary": "A Second example.",
+                "description": "email id is the username. Password will be hashed using Bcrypt.",
+                "value": {
+                    "email": "sharma@gmail.com",
+                    "password": "anotherplainpassword",
+                },
+            },
+            "invalid": {
+                "summary": "Invalid data is rejected with an error.",
+                "value": {
+                    "email": "dilip@gmail.com",
+                    "password": "plainpassword",
+                },
+            },
+        },
+    ), db: Session = Depends(db_session)) -> User:
     """
     Create new User
 
