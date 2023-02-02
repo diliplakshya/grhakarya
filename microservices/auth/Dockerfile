@@ -5,7 +5,7 @@ WORKDIR /tmp
 COPY pyproject.toml /tmp
 COPY poetry.lock /tmp
 
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+RUN poetry export -f requirements.txt --only base --only dev --only docs --output requirements.txt --without-hashes
 
 FROM diliplakshya/python-3.11.1-poetry-slim-bullseye
 

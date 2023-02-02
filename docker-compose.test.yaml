@@ -1,8 +1,61 @@
 version: '3.8'
 services:
-  milk_test:
+  mysql-db-test:
+    image: mysql:8.0.29
+    container_name: grahakarya-mysql-db-test
+    ports:
+      - "3309:3306"
+    command: --init-file /data/application/dbinit.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    networks: 
+      - mysql-test-connection
+    volumes:
+      - mysql-test-data:/var/lib/mysql
+      - mysql-test-init:/data/application
+
+  mysql-test-admin:    
+    image: phpmyadmin:latest
+    container_name: grahakarya-mysql-db-admin-test
+    environment:
+      PMA_HOST: mysql-db-test
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:      
+      - "8080:80"
+    networks: 
+      - mysql-test-connection
+
+  auth:
     build: 
       context: ./microservices/auth
       dockerfile: Dockerfile.test
     image: diliplakshya/grahakarya-auth-test
     container_name: grhakarya-auth-test
+    ports:
+      - 6001:6001
+    env_file:
+      - ./.env     # path to your .env file
+    networks: 
+      - mysql-test-connection
+    depends_on:
+      - mysql-db-test
+
+volumes:
+  mysql-test-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/tmp'
+
+  mysql-test-init:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '${PWD}/database/mysql/data/sql'
+
+networks:
+  mysql-test-connection:
