@@ -24,12 +24,11 @@ router = APIRouter(
     responses={404: {"description": "Token URL Not found"}},
 )
 
-
 @router.get("/")
 async def token_home(token: str = Depends(oauth2_scheme)) -> str:
     return "Welcome"
 
-@router.post("/create", response_model=User)
+@router.post("/create", response_model=User, status_code=status.HTTP_201_CREATED, response_description="The created user",)
 async def create(user: UserCreate = Body(
         examples={
             "first": {
@@ -76,7 +75,7 @@ async def create(user: UserCreate = Body(
     """
     return create_new_user(db=db, user=user)
 
-@router.get("/user", response_model=User)
+@router.get("/user", response_model=User, status_code=status.HTTP_200_OK, response_description="The authenticated user",)
 async def get_user(user: UserCreate = Depends(get_current_active_user)) -> User:
     """
     To get currentlya activated user.
@@ -95,7 +94,7 @@ async def get_user(user: UserCreate = Depends(get_current_active_user)) -> User:
     """
     return user
 
-@router.post("/login", response_model=Token)
+@router.post("/login", response_model=Token, status_code=status.HTTP_201_CREATED, response_description="The created hashed access token",)
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(db_session)) -> Token:
     """
     API for authenticating user.
@@ -133,7 +132,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
     access_token = generate_access_token(user.email)
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.get("/user", response_model=User)
+@router.get("/user", response_model=User, status_code=status.HTTP_200_OK, response_description="Currently active user.",)
 async def get_user(user: UserCreate = Depends(get_current_active_user)) -> User:
     """
     To get user from database.
