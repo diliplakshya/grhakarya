@@ -11,8 +11,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     healthcheck:
         test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-        timeout: 10s
-        retries: 5
+        timeout: 3s
+        retries: 10
     networks:
       - grahakarya-auth-mysql-connection-test
     volumes:
