@@ -5,7 +5,7 @@
 """
 
 from passlib.context import CryptContext
-from ..config.config import settings
+from config.config import settings
 
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

@@ -4,7 +4,7 @@
     This module is responsible for providing DB connection dependencies to other modules.
     It creates a DB connection session object and returns it to calling module.
 """
-from ..db.connection import SessionLocal
+from db.connection import SessionLocal
 
 
 # Get DB Connection Session

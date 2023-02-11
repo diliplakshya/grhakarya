@@ -6,7 +6,7 @@
 import os
 import logging
 from logging import config
-from ..config.config import settings
+from config.config import settings
 
 
 class AuthFileLogger():

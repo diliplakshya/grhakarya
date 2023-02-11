@@ -1,31 +1,38 @@
 version: '3.8'
 services:
-  mysql-db:
+  grahakarya-auth-mysql-db-dev:
     image: mysql:8.0.29
-    container_name: grahakarya-mysql-db
+    container_name: grahakarya-auth-mysql-db-dev
     ports:
       - "3308:3306"
     command: --init-file /data/application/dbinit.sql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+    healthcheck:
+        test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+        timeout: 10s
+        retries: 5
     networks: 
-      - mysql-connection
+      - grahakarya-auth-mysql-connection-dev
     volumes:
-      - mysql-data:/var/lib/mysql
-      - mysql-init:/data/application
+      - grahakarya-auth-mysql-data-dev:/var/lib/mysql
+      - grahakarya-auth-mysql-init-dev:/data/application
 
-  mysql-admin:    
+  grahakarya-auth-mysql-db-admin-dev:    
     image: phpmyadmin:latest
-    container_name: grahakarya-mysql-db-admin
+    container_name: grahakarya-auth-mysql-db-admin-dev
     environment:
-      PMA_HOST: mysql-db
+      PMA_HOST: grahakarya-auth-mysql-db-dev
       PMA_USER: ${MYSQL_USER}
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:      
       - "8080:80"
     networks: 
-      - mysql-connection
+      - grahakarya-auth-mysql-connection-dev
+    depends_on:
+      grahakarya-auth-mysql-db-dev:
+        condition: service_healthy
 
   web:
     build: ./web
@@ -36,7 +43,7 @@ services:
     volumes:
       - ./web:/app
 
-  auth:
+  grahakarya-auth-dev:
     build: ./microservices/auth
     image: diliplakshya/grahakarya-auth-dev
     container_name: grhakarya-auth-dev
@@ -63,24 +70,25 @@ services:
     volumes:
       - ./microservices/auth:/app
     networks: 
-      - mysql-connection
+      - grahakarya-auth-mysql-connection-dev
     depends_on:
-      - mysql-db
+      grahakarya-auth-mysql-db-dev:
+        condition: service_healthy
 
 volumes:
-  mysql-data:
+  grahakarya-auth-mysql-data-dev:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '${PWD}/database/mysql/data/db'
+      device: '${PWD}/database/mysql/data/db/dev'
 
-  mysql-init:
+  grahakarya-auth-mysql-init-dev:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '${PWD}/database/mysql/data/sql'
+      device: '${PWD}/database/mysql/data/sql/dev'
 
 networks:
-  mysql-connection:
+  grahakarya-auth-mysql-connection-dev:

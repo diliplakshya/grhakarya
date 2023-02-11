@@ -30,6 +30,7 @@ ARG SPHINX_DIRECTORY
 
 ARG LOG_CONFIG
 ARG LOG_FILE_PATH
+ARG LOG_FILE_NAME
 
 ARG MYSQL_HOST
 ARG MYSQL_PORT
@@ -59,4 +60,4 @@ RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-build", "docs/source", "docs/bui
 COPY docs /app/docs
 
 # Run the application in the port 5001
-CMD ["uvicorn", "src.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "5001"]
+CMD ["python", "src/main.py"]
