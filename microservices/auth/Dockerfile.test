@@ -55,5 +55,9 @@ COPY src /app/src
 COPY tests /app/src
 COPY __init__.py .
 
+RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-apidoc", "-o", "docs/source", "src"]
+RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-build", "docs/source", "docs/build"]
+COPY docs /app/docs
+
 # Run the application in the port 5001
 CMD ["uvicorn", "src.main:app", "--reload", "--workers", "1", "--host", "0.0.0.0", "--port", "5001"]

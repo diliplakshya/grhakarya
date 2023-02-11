@@ -3,6 +3,7 @@
 
     This module is responsible for providing logging service to all modules.
 """
+import os
 import logging
 from logging import config
 from ..config.config import settings
@@ -16,9 +17,8 @@ class AuthFileLogger():
     This is used for providing single class across all other modules.
     """
     # The config file for logging formatter.
-
     if settings.environment == "development":
-        config.fileConfig(settings.log_config, defaults={"logfile": settings.log_file_path}, disable_existing_loggers=True)
+        config.fileConfig(settings.log_config, defaults={"logfile": os.path.join(settings.log_file_path, settings.log_file_name)}, disable_existing_loggers=True)
     else:
         config.fileConfig(settings.log_config, disable_existing_loggers=True)
 

@@ -26,6 +26,5 @@ def create_dir_if_not_exists(path: str) -> bool:
     if not os.path.exists(path):
         os.makedirs(path)
         print(f"Directory {path} created.")
-        print("Directory " , path ,  " Created ")
     else:    
         print(f"Skipped creating directory {path}. Given directory already exists.")

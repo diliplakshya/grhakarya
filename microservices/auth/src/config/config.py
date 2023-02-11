@@ -30,6 +30,7 @@ class Settings(BaseSettings):
 
     log_config:str = None
     log_file_path:str = None
+    log_file_name:str = None
 
     mysql_host:str = None
     mysql_port:str = None
@@ -41,7 +42,5 @@ class Settings(BaseSettings):
     algorithm: str = None
     access_token_expire_minutes: int = None
 
-    class Config:
-        env_file = ".env"
 
 settings = Settings()

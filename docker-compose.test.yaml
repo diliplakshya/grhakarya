@@ -27,16 +27,32 @@ services:
     networks: 
       - mysql-test-connection
 
-  auth:
+  auth-test:
     build: 
       context: ./microservices/auth
       dockerfile: Dockerfile.test
     image: diliplakshya/grahakarya-auth-test
     container_name: grhakarya-auth-test
+    environment:
+      BUILD_ENV: ${BUILD_ENV}
+      API_VERSION: ${API_VERSION}
+      API_TITLE: ${API_TITLE}
+      API_HOST: ${API_HOST}
+      API_PORT: ${API_PORT}
+      SPHINX_DIRECTORY: ${SPHINX_DIRECTORY}
+      LOG_CONFIG: ${LOG_CONFIG}
+      LOG_FILE_PATH: ${LOG_FILE_PATH}
+      LOG_FILE_NAME: ${LOG_FILE_NAME}
+      SECRET_KEY: ${SECRET_KEY}
+      ALGORITHM: ${ALGORITHM}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - 6001:6001
-    env_file:
-      - ./.env     # path to your .env file
     networks: 
       - mysql-test-connection
     depends_on:

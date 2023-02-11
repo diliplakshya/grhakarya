@@ -40,10 +40,26 @@ services:
     build: ./microservices/auth
     image: diliplakshya/grahakarya-auth-dev
     container_name: grhakarya-auth-dev
+    environment:
+      BUILD_ENV: ${BUILD_ENV}
+      API_VERSION: ${API_VERSION}
+      API_TITLE: ${API_TITLE}
+      API_HOST: ${API_HOST}
+      API_PORT: ${API_PORT}
+      SPHINX_DIRECTORY: ${SPHINX_DIRECTORY}
+      LOG_CONFIG: ${LOG_CONFIG}
+      LOG_FILE_PATH: ${LOG_FILE_PATH}
+      LOG_FILE_NAME: ${LOG_FILE_NAME}
+      SECRET_KEY: ${SECRET_KEY}
+      ALGORITHM: ${ALGORITHM}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - 5001:5001
-    env_file:
-      - ./.env     # path to your .env file
     volumes:
       - ./microservices/auth:/app
     networks: 

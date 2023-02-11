@@ -7,9 +7,9 @@ import time
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+from .config.config import settings
 from .db.connection import Base, engine
 from .routers import token
-from .config.config import settings
 from .routers.sphinx import sphinx_routes
 from .utils.file_helper import create_dir_if_not_exists
 
@@ -75,10 +75,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Base.metadata.create_all(bind=engine)
-
 if settings.environment == 'development':
     create_dir_if_not_exists(settings.log_file_path)
+
+Base.metadata.create_all(bind=engine)
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
