@@ -55,6 +55,9 @@ COPY configuration /app/configuration
 COPY src /app/src
 COPY __init__.py .
 
+RUN ["/bin/sh", "-c" , "echo", "Namaste"]
+RUN ["poetry", "run", "sphinx-apidoc", "-o", "docs/source", "src"]
+RUN poetry run sphinx-apidoc -o docs/source src
 RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-apidoc", "-o", "docs/source", "src"]
 RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-build", "docs/source", "docs/build"]
 COPY docs /app/docs
