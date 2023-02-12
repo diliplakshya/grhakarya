@@ -3,7 +3,7 @@
 
     Database connection URL used for connecting to database.
 """
-from ..config.config import settings
+from config.config import settings
 
 
 SQL_ALCHEMY_MYSQL_CONNECTION_URL = url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(

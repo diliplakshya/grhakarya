@@ -6,13 +6,13 @@
 from fastapi import Body, APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from ..schemas.user_schema import UserCreate, User
-from ..dependencies.oauth_dependency import oauth2_scheme
-from ..service.token_service import authenticate_user, \
+from schemas.user_schema import UserCreate, User
+from dependencies.oauth_dependency import oauth2_scheme
+from service.token_service import authenticate_user, \
     generate_access_token, get_current_active_user, create_new_user
-from ..dependencies.db_dependency import db_session
-from ..schemas.token_schema import Token
-from ..logging.logging import AuthFileLogger
+from dependencies.db_dependency import db_session
+from schemas.token_schema import Token
+from app_logging.app_logging import AuthFileLogger
 
 
 logger = AuthFileLogger(__name__)

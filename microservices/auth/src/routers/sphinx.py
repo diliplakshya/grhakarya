@@ -1,7 +1,7 @@
 from starlette.routing import Mount, BaseRoute
 from starlette.staticfiles import StaticFiles
 from typing import List
-from ..config.config import settings
+from config.config import settings
 
 
 def sphinx_routes() -> List[BaseRoute]:

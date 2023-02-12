@@ -27,11 +27,11 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Start containers
-        run: docker-compose -f "docker-compose.test.yml" up -d --build
+        run: docker-compose -f docker-compose.test.yaml up -d --build
+             docker compose -f docker-compose.test.yaml exec grahakarya-auth-test pytest /app
 
       # Runs a set of commands using the runners shell
       - name: Stop containers
         if: always()
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          docker compose -f docker-compose.test.yaml stop

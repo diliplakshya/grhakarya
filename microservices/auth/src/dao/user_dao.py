@@ -6,8 +6,8 @@
  """
 from fastapi import Depends
 from sqlalchemy.orm import Session
-from ..models import user_model
-from ..schemas.user_schema import UserCreate, User
+from models import user_model
+from schemas.user_schema import UserCreate, User
 
 
 def get_user(db: Session, user_id: int) -> User:

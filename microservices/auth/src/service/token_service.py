@@ -11,12 +11,12 @@ from datetime import timedelta
 from jose import jwt
 from datetime import datetime, timedelta
 from typing import Union
-from ..dao.user_dao import get_user_by_email, create_user
-from ..utils.hashing_helper import get_hashed_password, verify_password
-from ..dependencies.db_dependency import db_session
-from ..dependencies.oauth_dependency import oauth2_scheme
-from ..config.config import settings
-from ..schemas.user_schema import User, UserCreate
+from dao.user_dao import get_user_by_email, create_user
+from utils.hashing_helper import get_hashed_password, verify_password
+from dependencies.db_dependency import db_session
+from dependencies.oauth_dependency import oauth2_scheme
+from config.config import settings
+from schemas.user_schema import User, UserCreate
 
 
 credentials_exception = HTTPException(
