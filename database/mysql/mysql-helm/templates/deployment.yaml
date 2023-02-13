@@ -24,7 +24,6 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "mysql-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -37,7 +36,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Release.Name }}-ConfigMap
+                  name: {{ .Release.Name }}-configmap
                   key: mysql_root_password
           volumeMounts:
             - name: {{ .Values.deployment.containers.volumes.data.name }}
@@ -45,7 +44,7 @@ spec:
               subPath: {{ .Values.deployment.containers.volumes.data.subPath }}
             - name: {{ .Values.deployment.containers.volumes.init.name }}
               mountPath: {{ .Values.deployment.containers.volumes.init.mountPath }}
-        - name: {{ .Values.deployment.containers.main.name }}
+        - name: {{ .Values.deployment.containers.admin.name }}
           image: {{ .Values.deployment.containers.admin.image }}
           imagePullPolicy: {{ .Values.deployment.containers.admin.imagePullPolicy }}
           ports:
@@ -54,22 +53,22 @@ spec:
             - name: PMA_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Release.Name }}-ConfigMap
+                  name: {{ .Release.Name }}-configmap
                   key: dns
             - name: PMA_USER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Release.Name }}-ConfigMap
+                  name: {{ .Release.Name }}-configmap
                   key: mysql_user
             - name: PMA_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Release.Name }}-ConfigMap
+                  name: {{ .Release.Name }}-configmap
                   key: mysql_root_password
       volumes:
         - name: {{ .Values.deployment.containers.volumes.data.name }}
           persistentVolumeClaim:
             claimName: {{ .Values.deployment.containers.volumes.data.claimName }}
         - name: {{ .Values.deployment.containers.volumes.init.name }}
-          configMap:
-            name: {{ .Release.Name }}-ConfigMap
+          configmap:
+            name: {{ .Release.Name }}-configmap

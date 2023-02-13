@@ -3,7 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Values.PersistentVolume.VolumeClaim.name }}
 spec:
-  accessModes: {{ .Values.PersistentVolume.VolumeClaim.accessModes }}
+  accessModes: 
+    - {{ .Values.PersistentVolume.VolumeClaim.accessModes }}
   resources:
     requests:
       storage: {{ .Values.PersistentVolume.VolumeClaim.storage }}
