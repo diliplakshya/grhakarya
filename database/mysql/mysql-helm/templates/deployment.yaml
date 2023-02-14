@@ -68,7 +68,7 @@ spec:
       volumes:
         - name: {{ .Values.deployment.containers.volumes.data.name }}
           persistentVolumeClaim:
-            claimName: {{ .Values.deployment.containers.volumes.data.claimName }}
+            claimName: {{ .Values.PersistentVolume.VolumeClaim.name }}
         - name: {{ .Values.deployment.containers.volumes.init.name }}
           configmap:
             name: {{ .Release.Name }}-configmap
