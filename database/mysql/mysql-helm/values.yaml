@@ -61,7 +61,7 @@ ports:
     
 service:
   name: grahakarya-auth-mysql-dev
-  type: LoadBalancer
+  type: ClusterIP
 
 deployment:
   containers:
