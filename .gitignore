@@ -67,3 +67,6 @@ packages/react-devtools-timeline/dist
 
 # Docker
 database/mysql/data/db
+
+# Helm/Kubernetes
+database/mysql/mysql-helm/environments
