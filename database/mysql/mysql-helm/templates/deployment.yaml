@@ -18,7 +18,6 @@ spec:
       annotations:
         checksum/configmap1: {{ printf "environments/%s/configmap.yaml" .Values.global.env | .Files.Get | sha256sum }}
         checksum/secrets: {{ printf "environments/%s/secret.yaml" .Values.namespace | .Files.Get | sha256sum }}
-
       {{- end }}
       labels:
         {{- include "mysql-helm.selectorLabels" . | nindent 8 }}
@@ -38,8 +37,8 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
                   key: mysql_root_password
           volumeMounts:
             - name: {{ .Values.deployment.containers.volumes.data.name }}
@@ -60,13 +59,13 @@ spec:
                   key: dns
             - name: PMA_USER
               valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
                   key: mysql_user
             - name: PMA_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
                   key: mysql_root_password
       volumes:
         - name: {{ .Values.deployment.containers.volumes.data.name }}

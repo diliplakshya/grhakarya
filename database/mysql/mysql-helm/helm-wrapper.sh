@@ -1,9 +1,10 @@
 BUILD_ENV=${1:-dev}
 VALUES_FILE=values-$BUILD_ENV.yaml
 
-helm uninstall test
+echo "Deleting chart, please wait..."
+helm uninstall --wait test
 
-# helm lint . -f $VALUES_FILE
+# helm lint --debug . --strict --values $VALUES_FILE
 
 # helm template test . -f $VALUES_FILE
 
