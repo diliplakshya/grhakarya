@@ -45,7 +45,7 @@ PersistentVolume:
     accessModes: ReadWriteOnce
 
 configmap:
-  name: grahakarya-auth-grahakarya-auth-mysql-data-store-env
+  name: grahakarya-auth-mysql-data-store-env
 
 ports:
   main:
@@ -61,7 +61,7 @@ ports:
     
 service:
   name: grahakarya-auth-mysql-dev
-  type: ClusterIP
+  type: NodePort
 
 deployment:
   containers:

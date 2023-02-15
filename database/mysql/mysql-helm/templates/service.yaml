@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels: {{ include "mysql-helm.labels" . | nindent 4 }}
+  labels: {{- include "mysql-helm.labels" . | nindent 4 }}
   name: {{ .Values.service.name }}
 spec:
   selector:
-    {{ include "mysql-helm.labels" . | nindent 4 }}
+    {{- include "mysql-helm.selectorLabels" . | nindent 4 }}
   ports:
     - name: {{ .Values.ports.main.name }}
       port: {{ .Values.ports.main.port }}
