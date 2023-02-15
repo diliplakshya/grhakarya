@@ -1,7 +1,10 @@
 # Default values for mysql-helm.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+namespace: grahakarya-mysql-namespace
 
+global:
+  env: dev
 replicaCount: 1
 
 image:
@@ -38,7 +41,6 @@ PersistentVolume:
     accessModes: ReadOnlyMany
     hostPath:
       path: /home/isha/Documents/source_code/grhakarya/database/mysql/data/sql/dbinit.sql
-      type: DirectoryOrCreate
   VolumeClaim:
     name: mysql-data-disk
     storage: 1Mi
@@ -58,6 +60,7 @@ ports:
     port: 8080
     targetPort: 80
     containerPort: 80
+    NodePort: 32000
     
 service:
   name: grahakarya-auth-mysql-dev
@@ -76,7 +79,6 @@ deployment:
     volumes:
       data:
         name: mysql-data
-        claimName: mysql-data-disk
         mountPath: /var/lib/mysql
         subPath: mysql
       init:

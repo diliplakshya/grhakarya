@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "mysql-helm.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "mysql-helm.labels" . | nindent 4 }}
 spec:
@@ -15,7 +16,9 @@ spec:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        checksum/configmap1: {{ printf "environments/%s/configmap.yaml" .Values.global.env | .Files.Get | sha256sum }}
+        checksum/secrets: {{ printf "environments/%s/secret.yaml" .Values.namespace | .Files.Get | sha256sum }}
+
       {{- end }}
       labels:
         {{- include "mysql-helm.selectorLabels" . | nindent 8 }}
