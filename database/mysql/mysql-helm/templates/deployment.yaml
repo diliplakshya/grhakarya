@@ -40,6 +40,16 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-secret
                   key: mysql_root_password
+          command: ["/bin/sh", "-c"]
+          livenessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: {{ .Values.deployment.containers.volumes.data.name }}
               mountPath: {{ .Values.deployment.containers.volumes.data.mountPath }}
