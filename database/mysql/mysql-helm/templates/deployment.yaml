@@ -40,7 +40,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-secret
                   key: mysql_root_password
-          command: ["/bin/sh", "-c"]
           livenessProbe:
             exec:
               command:

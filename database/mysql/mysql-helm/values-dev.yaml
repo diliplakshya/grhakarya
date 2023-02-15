@@ -40,7 +40,7 @@ PersistentVolume:
     VolumeMode: FileSystem
     accessModes: ReadOnlyMany
     hostPath:
-      path: /home/isha/Documents/source_code/grhakarya/database/mysql/data/sql/dbinit.sql
+      path: /home/isha/Documents/source_code/grhakarya/database/mysql/data/sql/dev/dbinit.sql
   VolumeClaim:
     name: mysql-data-disk
     storage: 1Mi
