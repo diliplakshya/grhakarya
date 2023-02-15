@@ -281,6 +281,26 @@ Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-te
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- Software to be installed -->
+## :softwares: SW
+
+- Docker
+- Docker Compose
+- Make
+- Kubectl
+- Minikube
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- VS Code Extentions -->
+## :extentions: VSCode
+
+- Helm
+  + https://github.com/tim-koehler/Helm-Intellisense
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- FAQ -->
 ## :grey_question: FAQ
 
