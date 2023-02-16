@@ -12,4 +12,7 @@ helm uninstall --wait grahakarya
 
 # helm install grahakarya . -f $VALUES_FILE
 
-# helm upgrade --install --wait grahakarya . -f $VALUES_FILE
+helm upgrade --install --wait grahakarya .
+
+kubectl get svc -A
+
