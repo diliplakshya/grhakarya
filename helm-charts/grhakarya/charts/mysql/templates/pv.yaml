@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.PersistentVolume.Volume.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "mysql-helm.labels" . | nindent 4 }}
+    {{- include "mysql.labels" . | nindent 4 }}
 spec:
   storageClassName: manual
   capacity:

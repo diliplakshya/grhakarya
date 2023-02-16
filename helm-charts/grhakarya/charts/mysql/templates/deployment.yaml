@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "mysql-helm.fullname" . }}
+  name: {{ include "mysql.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "mysql-helm.labels" . | nindent 4 }}
+    {{- include "mysql.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "mysql-helm.selectorLabels" . | nindent 6 }}
+      {{- include "mysql.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,7 +20,7 @@ spec:
         checksum/secrets: {{ printf "environments/%s/secret.yaml" .Values.namespace | .Files.Get | sha256sum }}
       {{- end }}
       labels:
-        {{- include "mysql-helm.selectorLabels" . | nindent 8 }}
+        {{- include "mysql.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

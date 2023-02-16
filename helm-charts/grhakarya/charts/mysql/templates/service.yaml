@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: {{ .Values.service.name }}
   namespace: {{ .Values.namespace }}
-  labels: {{- include "mysql-helm.labels" . | nindent 4 }}
+  labels: {{- include "mysql.labels" . | nindent 4 }}
 spec:
   selector:
-    {{- include "mysql-helm.selectorLabels" . | nindent 4 }}
+    {{- include "mysql.selectorLabels" . | nindent 4 }}
   ports:
     - name: {{ .Values.ports.main.name }}
       port: {{ .Values.ports.main.port }}
