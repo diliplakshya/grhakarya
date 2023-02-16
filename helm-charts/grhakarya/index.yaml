@@ -1,0 +1,22 @@
+apiVersion: v1
+entries:
+  grhakarya:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-16T17:25:13.323299664+05:30"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: ""
+    description: A Helm chart for Kubernetes
+    digest: c14905a620504f4c7af0927bfc7e9590ecb970b59d50ad0e87d30a8b393d4548
+    maintainers:
+    - email: diliplakshya@gmail.com
+      name: Dilip Kumar Sharma
+      url: https://in.linkedin.com/in/diliplakshya
+    name: grhakarya
+    type: application
+    urls:
+    - https://github.com/vyavasthita/grhakarya/tree/helm-repo/grhakarya-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-16T17:25:13.320776984+05:30"
