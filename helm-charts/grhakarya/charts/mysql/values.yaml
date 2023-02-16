@@ -5,8 +5,8 @@ enabled: true
 
 namespace: grahakarya-mysql-namespace
 
-global:
-  env: dev
+env: dev
+
 replicaCount: 1
 
 image:

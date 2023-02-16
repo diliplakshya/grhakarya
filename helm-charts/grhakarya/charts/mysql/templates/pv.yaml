@@ -2,7 +2,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: {{ .Values.PersistentVolume.Volume.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ printf "%s-%s" .Values.namespace .Values.env }}
   labels:
     {{- include "mysql.labels" . | nindent 4 }}
 spec:
