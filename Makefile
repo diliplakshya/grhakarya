@@ -1,5 +1,5 @@
-NAME := grahakarya
-
+NAME := grhakarya
+REPO_URL=https://vyavasthita.github.io/grhakarya/
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -20,6 +20,13 @@ help:
 	@echo "  ps		show container status"
 	@echo "  destroy	destroy containers"
 	@echo "  runtest	run unit tests for auth microservice"
+	@echo "  u	Uninstall helm package"
+	@echo "  l	Test helm menifests"
+	@echo "  t	Check menifests for helm"
+	@echo "  li		Install helm package from local"
+	@echo "  upg	Upgrade with install helm package from local"
+	@echo "  p	Create helm package"
+	@echo "  ind	Create helm repo index file"
 	@echo ""
 	@echo "Go forth and make something great!"
 
@@ -78,4 +85,36 @@ destroy: ## destroy containers
 	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) down -v
 .PHONY: runtest
 runtest: ## run unit tests for auth microservice
-	docker compose -f $(COMPOSE_FILE) exec grahakarya-auth-test pytest /app
+	docker compose -f $(COMPOSE_FILE) exec grahakarya-auth-test pytest /
+
+.PHONY: u
+u: ## Uninstall helm package
+	helm uninstall --wait $(NAME)
+
+.PHONY: l
+l: ## Test helm menifests
+	helm lint --debug --strict helm-charts/$(NAME)
+
+.PHONY: t
+t: ## Check menifests for helm
+	helm template $(NAME) helm-charts/$(NAME)
+
+.PHONY: li
+li: ## Install helm package from local
+	helm install $(NAME) helm-charts/$(NAME) --atomic
+
+.PHONY: ri
+ri: ## Install helm package from remote
+	helm install $(NAME) $(NAME)/$(NAME) --atomic
+
+.PHONY: upg
+upg: ## Upgrade with install helm package from local
+	helm upgrade --install --wait $(NAME) helm-charts/$(NAME)
+
+.PHONY: p
+p: ## Create helm package
+	helm package helm-charts/$(NAME) .
+
+.PHONY: ind
+ind: ## Create helm repo index file
+	helm repo index . --url $(REPO_URL) --merge index.yaml .

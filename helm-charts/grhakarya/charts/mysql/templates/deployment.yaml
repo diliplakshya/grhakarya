@@ -1,24 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "mysql-helm.fullname" . }}
+  name: {{ include "mysql.fullname" . }}
+  namespace: {{ printf "%s-%s" .Values.namespace .Values.env }}
   labels:
-    {{- include "mysql-helm.labels" . | nindent 4 }}
+    {{- include "mysql.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "mysql-helm.selectorLabels" . | nindent 6 }}
+      {{- include "mysql.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
+        checksum/configmap1: {{ printf "environments/%s/configmap.yaml" .Values.env | .Files.Get | sha256sum }}
+        checksum/secrets: {{ printf "environments/%s/secret.yaml" .Values.env | .Files.Get | sha256sum }}
       {{- end }}
       labels:
-        {{- include "mysql-helm.selectorLabels" . | nindent 8 }}
+        {{- include "mysql.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -35,9 +37,18 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
                   key: mysql_root_password
+          livenessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - name: {{ .Values.deployment.containers.volumes.data.name }}
               mountPath: {{ .Values.deployment.containers.volumes.data.mountPath }}
@@ -57,13 +68,13 @@ spec:
                   key: dns
             - name: PMA_USER
               valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
                   key: mysql_user
             - name: PMA_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
                   key: mysql_root_password
       volumes:
         - name: {{ .Values.deployment.containers.volumes.data.name }}

@@ -2,8 +2,9 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: {{ .Values.PersistentVolume.Volume.name }}
+  namespace: {{ printf "%s-%s" .Values.namespace .Values.env }}
   labels:
-    {{- include "mysql-helm.labels" . | nindent 4 }}
+    {{- include "mysql.labels" . | nindent 4 }}
 spec:
   storageClassName: manual
   capacity:
