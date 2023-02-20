@@ -20,7 +20,6 @@ help:
 	@echo "  ps		show container status"
 	@echo "  destroy	destroy containers"
 	@echo "  runtest	run unit tests for auth microservice"
-
 	@echo "  u	Uninstall helm package"
 	@echo "  l	Test helm menifests"
 	@echo "  t	Check menifests for helm"
@@ -28,7 +27,6 @@ help:
 	@echo "  upg	Upgrade with install helm package from local"
 	@echo "  p	Create helm package"
 	@echo "  ind	Create helm repo index file"
-
 	@echo ""
 	@echo "Go forth and make something great!"
 
@@ -103,7 +101,11 @@ t: ## Check menifests for helm
 
 .PHONY: li
 li: ## Install helm package from local
-	helm install $(NAME) helm-charts/$(NAME)
+	helm install $(NAME) helm-charts/$(NAME) --atomic
+
+.PHONY: ri
+ri: ## Install helm package from remote
+	helm install $(NAME) $(NAME)/$(NAME) --atomic
 
 .PHONY: upg
 upg: ## Upgrade with install helm package from local
@@ -115,4 +117,4 @@ p: ## Create helm package
 
 .PHONY: ind
 ind: ## Create helm repo index file
-	helm repo index . --url $(REPO_URL)
+	helm repo index . --url $(REPO_URL) --merge index.yaml .
