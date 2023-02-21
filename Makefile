@@ -98,19 +98,19 @@ l: ## Test helm menifests
 
 .PHONY: t
 t: ## Check menifests for helm
-	helm template $(NAME) helm-charts/$(NAME) --set env=$(BUILD_ENV)
+	helm template $(NAME) helm-charts/$(NAME) --set global.env=$(BUILD_ENV)
 
 .PHONY: li
 li: ## Install helm package from local
-	helm install $(NAME) helm-charts/$(NAME) --atomic
+	helm install $(NAME) helm-charts/$(NAME) --atomic --set global.env=$(BUILD_ENV)
 
 .PHONY: ri
 ri: ## Install helm package from remote
-	helm install $(NAME) $(NAME)/$(NAME) --atomic
+	helm install $(NAME) $(NAME)/$(NAME) --atomic --set global.env=$(BUILD_ENV)
 
 .PHONY: upg
 upg: ## Upgrade with install helm package from local
-	helm upgrade --install --wait $(NAME) helm-charts/$(NAME)
+	helm upgrade --install --wait $(NAME) helm-charts/$(NAME) --set global.env=$(BUILD_ENV)
 
 .PHONY: p
 p: ## Create helm package

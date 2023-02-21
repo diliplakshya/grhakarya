@@ -1,4 +1,4 @@
-dns: 127.0.0.1
-mysql_database: authprod
+dns: db4free.net
+mysql_database: authdb
 dbinit.sql: |
     CREATE DATABASE IF NOT EXISTS authprod;
