@@ -29,6 +29,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
+        {{- if eq .Values.env "dev" }}
         - name: {{ .Values.deployment.containers.main.name }}
           image: {{ .Values.deployment.containers.main.image }}
           imagePullPolicy: {{ .Values.deployment.containers.main.imagePullPolicy }}
@@ -55,6 +56,7 @@ spec:
               subPath: {{ .Values.deployment.containers.volumes.data.subPath }}
             - name: {{ .Values.deployment.containers.volumes.init.name }}
               mountPath: {{ .Values.deployment.containers.volumes.init.mountPath }}
+        {{- end }}
         - name: {{ .Values.deployment.containers.admin.name }}
           image: {{ .Values.deployment.containers.admin.image }}
           imagePullPolicy: {{ .Values.deployment.containers.admin.imagePullPolicy }}

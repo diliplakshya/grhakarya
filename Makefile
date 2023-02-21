@@ -1,5 +1,6 @@
 NAME := grhakarya
 REPO_URL=https://vyavasthita.github.io/grhakarya/
+BUILD_ENV ?= dev
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -30,11 +31,11 @@ help:
 	@echo ""
 	@echo "Go forth and make something great!"
 
-ifeq ($(BUILD_ENV),testing)
+ifeq ($(BUILD_ENV),test)
  $(info testing)
  ENV_FILE=configuration/environment/.env.test
  COMPOSE_FILE=docker-compose.test.yaml
-else ifeq ($(BUILD_ENV), production)
+else ifeq ($(BUILD_ENV), prod)
 $(info production)
  ENV_FILE=configuration/environment/.env.prod
  COMPOSE_FILE=docker-compose.yaml
@@ -97,7 +98,7 @@ l: ## Test helm menifests
 
 .PHONY: t
 t: ## Check menifests for helm
-	helm template $(NAME) helm-charts/$(NAME)
+	helm template $(NAME) helm-charts/$(NAME) --set env=$(BUILD_ENV)
 
 .PHONY: li
 li: ## Install helm package from local
