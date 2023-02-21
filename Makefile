@@ -58,7 +58,7 @@ clean: ## clear network, container and images
 	docker image prune -f
 .PHONY: build
 build: ## build container images
-	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) build
+	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) build --no-cache
 .PHONY: up
 up: ## run containers
 	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) up -d --build --remove-orphans
