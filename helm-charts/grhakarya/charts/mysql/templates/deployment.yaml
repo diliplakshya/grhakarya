@@ -39,7 +39,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secret.name }}
                   key: mysql_root_password
           livenessProbe:
             exec:
@@ -66,17 +66,17 @@ spec:
             - name: PMA_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Release.Name }}-configmap
+                  name: {{ .Values.configmap.name }}
                   key: dns
             - name: PMA_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secret.name }}
                   key: mysql_user
             - name: PMA_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-secret
+                  name: {{ .Values.secret.name }}
                   key: mysql_root_password
       {{- if ne .Values.global.env "prod" }}
       volumes:
@@ -85,5 +85,5 @@ spec:
             claimName: {{ .Values.PersistentVolume.VolumeClaim.name }}
         - name: {{ .Values.deployment.containers.volumes.init.name }}
           configmap:
-            name: {{ .Release.Name }}-configmap
+            name: {{- .Values.configmap.name }}
       {{- end }}

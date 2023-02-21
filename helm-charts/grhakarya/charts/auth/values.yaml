@@ -4,10 +4,10 @@
 enabled: true
 
 configmap:
-  name: mysql-configmap
+  name: auth-configmap
 
 secret:
-  name: mysql-secret
+  name: auth-secret
 
 replicaCount: 1
 
@@ -34,57 +34,28 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-PersistentVolume:
-  Volume:
-    name: mysql-initdb-pv-volume
-    labels:
-      type: local
-      app: mysql
-    storage: 1Mi
-    VolumeMode: FileSystem
-    accessModes: ReadOnlyMany
-    hostPath:
-      path: /home/isha/Documents/source_code/grhakarya/database/mysql/data/sql/dev/dbinit.sql
-  VolumeClaim:
-    name: mysql-data-disk
-    storage: 1Mi
-    accessModes: ReadWriteOnce
-
 ports:
-  main:
-    name: mysql-main-port
-    port: 3306
-    targetPort: 3306
-    containerPort: 3306
-  admin:
-    name: mysql-admin-port
-    port: 8080
-    targetPort: 80
-    containerPort: 80
-    NodePort: 32000
+  dev:  
+    name: auth-dev-port
+    port: 5001
+    targetPort: 5001
+    containerPort: 5001
     
 service:
-  name: grahakarya-auth-mysql-dev
+  name: grahakarya-auth-dev
   type: NodePort
 
 deployment:
   containers:
-    main:
-        name: grahakarya-auth-mysql-main
-        image: mysql:8.0.29
-        imagePullPolicy: IfNotPresent
-    admin:
-        name: grahakarya-auth-mysql-admin
-        image: phpmyadmin:latest
+    dev:
+        name: grahakarya-auth-dev
+        image: diliplakshya/grahakarya-auth-dev
         imagePullPolicy: IfNotPresent
     volumes:
       data:
-        name: mysql-data
-        mountPath: /var/lib/mysql
-        subPath: mysql
-      init:
-        name: mysql-initdb
-        mountPath: /docker-entrypoint-initdb.db
+        name: auth-dev-volume
+        mountPath: /app/data
+
 ingress:
   enabled: false
   className: ""

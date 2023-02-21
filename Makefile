@@ -98,7 +98,7 @@ l: ## Test helm menifests
 
 .PHONY: t
 t: ## Check menifests for helm
-	helm template $(NAME) helm-charts/$(NAME) --set global.env=$(BUILD_ENV)
+	helm template $(NAME) helm-charts/$(NAME) --debug --set global.env=$(BUILD_ENV)
 
 .PHONY: li
 li: ## Install helm package from local
