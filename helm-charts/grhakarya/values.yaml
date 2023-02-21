@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 global:
   env: dev
+  namespace: grahakarya-namespace
 
 replicaCount: 1
 

@@ -2,9 +2,9 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: {{ .Values.PersistentVolume.Volume.name }}
-  namespace: {{ printf "%s-%s" .Values.namespace .Values.global.env }}
+  namespace: {{ printf "%s-%s" .Values.global.namespace .Values.global.env }}
   labels:
-    {{- include "mysql.labels" . | nindent 4 }}
+    {{- include "grhakarya.labels" . | nindent 4 }}
 spec:
   storageClassName: manual
   capacity:
