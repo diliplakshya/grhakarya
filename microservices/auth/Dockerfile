@@ -54,10 +54,13 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY configuration /app/configuration
 COPY src /app/src
 COPY __init__.py .
+COPY pyproject.toml .
+COPY poetry.lock .
+
 COPY docs /app/docs
 
-RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-apidoc", "-o", "docs/source", "src"]
-RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-build", "docs/source", "docs/build"]
+RUN ["sphinx-apidoc", "-o", "docs/source", "src"]
+RUN ["sphinx-build", "docs/source", "docs/build"]
 
-# Run the application in the port 5001
+
 CMD ["python", "src/main.py"]

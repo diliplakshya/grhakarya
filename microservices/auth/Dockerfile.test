@@ -55,10 +55,13 @@ COPY configuration /app/configuration
 COPY src /app/src
 COPY tests /app/tests
 COPY __init__.py .
+COPY pyproject.toml .
+COPY poetry.lock .
 
-RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-apidoc", "-o", "docs/source", "src"]
-RUN ["/bin/sh", "-c" , "poetry", "run", "sphinx-build", "docs/source", "docs/build"]
 COPY docs /app/docs
+
+RUN ["sphinx-apidoc", "-o", "docs/source", "src"]
+RUN ["sphinx-build", "docs/source", "docs/build"]
 
 # Run the application in the port 5001
 CMD ["python", "src/main.py"]
