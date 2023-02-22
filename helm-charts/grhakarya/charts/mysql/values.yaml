@@ -61,7 +61,7 @@ ports:
     port: 8080
     targetPort: 80
     containerPort: 80
-    NodePort: 32000
+    NodePort: 31001
     
 service:
   name: grahakarya-auth-mysql-dev

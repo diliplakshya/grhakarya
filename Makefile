@@ -102,7 +102,7 @@ t: ## Check menifests for helm
 
 .PHONY: li
 li: ## Install helm package from local
-	helm install $(NAME) helm-charts/$(NAME) --atomic --set global.env=$(BUILD_ENV)
+	helm install $(NAME) helm-charts/$(NAME) --set global.env=$(BUILD_ENV)
 
 .PHONY: ri
 ri: ## Install helm package from remote

@@ -11,3 +11,5 @@ spec:
     - name: {{ .Values.ports.dev.name }}
       port: {{ .Values.ports.dev.port }}
       targetPort: {{ .Values.ports.dev.targetPort }}
+      NodePort: {{ .Values.ports.dev.NodePort }}
+  type: {{ .Values.service.type }}
