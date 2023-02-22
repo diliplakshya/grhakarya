@@ -1,5 +1,6 @@
 NAME := grhakarya
 REPO_URL=https://vyavasthita.github.io/grhakarya/
+BUILD_ENV ?= dev
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -30,11 +31,11 @@ help:
 	@echo ""
 	@echo "Go forth and make something great!"
 
-ifeq ($(BUILD_ENV),testing)
+ifeq ($(BUILD_ENV),test)
  $(info testing)
  ENV_FILE=configuration/environment/.env.test
  COMPOSE_FILE=docker-compose.test.yaml
-else ifeq ($(BUILD_ENV), production)
+else ifeq ($(BUILD_ENV), prod)
 $(info production)
  ENV_FILE=configuration/environment/.env.prod
  COMPOSE_FILE=docker-compose.yaml
@@ -57,7 +58,7 @@ clean: ## clear network, container and images
 	docker image prune -f
 .PHONY: build
 build: ## build container images
-	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) build
+	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) build --no-cache
 .PHONY: up
 up: ## run containers
 	docker compose --env-file $(ENV_FILE) -f $(COMPOSE_FILE) up -d --build --remove-orphans
@@ -97,19 +98,19 @@ l: ## Test helm menifests
 
 .PHONY: t
 t: ## Check menifests for helm
-	helm template $(NAME) helm-charts/$(NAME)
+	helm template $(NAME) helm-charts/$(NAME) --debug --set global.env=$(BUILD_ENV)
 
 .PHONY: li
 li: ## Install helm package from local
-	helm install $(NAME) helm-charts/$(NAME) --atomic
+	helm install $(NAME) helm-charts/$(NAME) --set global.env=$(BUILD_ENV)
 
 .PHONY: ri
 ri: ## Install helm package from remote
-	helm install $(NAME) $(NAME)/$(NAME) --atomic
+	helm install $(NAME) $(NAME)/$(NAME) --atomic --set global.env=$(BUILD_ENV)
 
 .PHONY: upg
 upg: ## Upgrade with install helm package from local
-	helm upgrade --install --wait $(NAME) helm-charts/$(NAME)
+	helm upgrade --install --wait $(NAME) helm-charts/$(NAME) --set global.env=$(BUILD_ENV)
 
 .PHONY: p
 p: ## Create helm package

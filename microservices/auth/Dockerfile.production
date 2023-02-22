@@ -54,6 +54,8 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY configuration /app/configuration
 COPY src /app/src
 COPY __init__.py .
+COPY pyproject.toml .
+COPY poetry.lock .
 
 COPY docs /app/docs
 

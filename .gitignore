@@ -70,3 +70,6 @@ database/mysql/data/db
 
 # Helm/Kubernetes
 database/mysql/mysql-helm/environments
+
+# API
+configuration/environment/.env.*
