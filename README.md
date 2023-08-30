@@ -1,4 +1,3 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
@@ -9,18 +8,18 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
+<!-- [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[![MIT License][license-shield]][license-url] -->
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/vyavasthita/grhakarya">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -29,14 +28,14 @@
   <p align="center">
     Grhakarya Project!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/vyavasthita/grhakarya"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/vyavasthita/grhakarya">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/vyavasthita/grhakarya/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/vyavasthita/grhakarya/issues">Request Feature</a>
   </p>
 </div>
 
@@ -112,14 +111,14 @@ Major frameworks/libraries used in this project. Here are a few examples.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Color Reference -->
-### :art: Color Reference
+<!-- ### :art: Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
 | Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
 | Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
 | Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE | -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -145,93 +144,38 @@ To get a local copy up and running follow these simple example steps.
 
 This project uses Yarn as package manager
 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* TBD
 
 <!-- Installation -->
 ### :gear: Installation
 
-Install my-project with npm
-
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+TBD
    
 <!-- Running Tests -->
 ### :test_tube: Running Tests
 
 To run tests, run the following command
 
-```bash
-  yarn test test
-```
+TBD
 
 <!-- Run Locally -->
 ### :running: Run Locally
 
-Clone the project
-
-```bash
-  git clone https://github.com:siddhatva/grhakarya.git
-```
-
-Go to the project directory
-
-```bash
-  cd grhakarya
-```
-
-Install dependencies
-
-```bash
-  yarn install
-```
-
-Start the server
-
-```bash
-  yarn start
-```
+TBD
 
 <!-- Deployment -->
 ### :triangular_flag_on_post: Deployment
 
 To deploy this project run
 
-```bash
-  yarn deploy
-```
+TBD
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Usage -->
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+TBD
 
 
 <!-- Roadmap -->
@@ -241,11 +185,9 @@ function App() {
 - [x] Add back to top links
 - [ ] Add Additional Templates w/ Examples
 - [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] English
-    - [ ] Hindi
+\
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/vyavasthita/grhakarya/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -253,21 +195,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <!-- Contributing -->
 ## :wave: Contributing
 
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+TBD
 
 See `contributing.md` for ways to get started.
 
@@ -277,7 +205,7 @@ See `contributing.md` for ways to get started.
 <!-- Code of Conduct -->
 ### :scroll: Code of Conduct
 
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
+TBD
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -349,17 +277,17 @@ Use this section to mention useful resources and libraries that you have used in
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[contributors-url]: https://github.com/vyavasthita/grhakarya/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[forks-url]: https://github.com/vyavasthita/grhakarya/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[stars-url]: https://github.com/vyavasthita/grhakarya/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[issues-url]: https://github.com/vyavasthita/grhakarya/issues
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/vyavasthita/grhakarya/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://www.linkedin.com/in/diliplakshya/
 [product-screenshot]: images/screenshot.png
 [Python]: https://img.shields.io/badge/Python-000000?style=for-the-badge&logo=python&logoColor=white
 [Python-url]: https://www.python.org/
