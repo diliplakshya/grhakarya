@@ -44,6 +44,9 @@
     :scale: 100%
     :target: https://grhakarya.readthedocs.io/en/latest/
 
+# :notebook_with_decorative_cover: Notes
+This README needs to be updated with details.
+
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
 
@@ -252,9 +255,7 @@ Distributed under the no License. See LICENSE.txt for more information.
 <!-- Contact -->
 ## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+Your Name - Dilip Sharma <diliplakshya@gmail.com>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
